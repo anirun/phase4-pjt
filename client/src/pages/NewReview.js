@@ -4,20 +4,11 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
-function NewRecipe({ user }) {
+function NewReview({ user, hike }) {
   const [title, setTitle] = useState("My Awesome Recipe");
-  const [minutesToComplete, setMinutesToComplete] = useState("30");
-  const [instructions, setInstructions] = useState(`Here's how you make it.
-  
-## Ingredients
+  const [rating, setRating] = useState("5");
+  const [body, setBody] = useState(`Ispem Lorum`);
 
-- 1c Sugar
-- 1c Spice
-
-## Instructions
-
-**Mix** sugar and spice. _Bake_ for 30 minutes.
-  `);
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -25,15 +16,17 @@ function NewRecipe({ user }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/api/recipes", {
+    fetch(`/api/hike/${hike.id}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         title,
-        instructions,
-        minutes_to_complete: minutesToComplete,
+        rating,
+        body,
+        hike_id: hike.id,
+        user_id: user.id
       }),
     }).then((r) => {
       setIsLoading(false);
@@ -48,7 +41,7 @@ function NewRecipe({ user }) {
   return (
     <Wrapper>
       <WrapperChild>
-        <h2>Create Recipe</h2>
+        <h2>How was your hike?</h2>
         <form onSubmit={handleSubmit}>
           <FormField>
             <Label htmlFor="title">Title</Label>
@@ -60,26 +53,26 @@ function NewRecipe({ user }) {
             />
           </FormField>
           <FormField>
-            <Label htmlFor="minutesToComplete">Minutes to complete</Label>
+            <Label htmlFor="rating">Rating</Label>
             <Input
               type="number"
-              id="minutesToComplete"
-              value={minutesToComplete}
-              onChange={(e) => setMinutesToComplete(e.target.value)}
+              id="rating"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
             />
           </FormField>
           <FormField>
-            <Label htmlFor="instructions">Instructions</Label>
+            <Label htmlFor="body">Tell us more...</Label>
             <Textarea
-              id="instructions"
+              id="body"
               rows="10"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
             />
           </FormField>
           <FormField>
             <Button color="primary" type="submit">
-              {isLoading ? "Loading..." : "Submit Recipe"}
+              {isLoading ? "Loading..." : "Submit Review"}
             </Button>
           </FormField>
           <FormField>
@@ -92,11 +85,11 @@ function NewRecipe({ user }) {
       <WrapperChild>
         <h1>{title}</h1>
         <p>
-          <em>Time to Complete: {minutesToComplete} minutes</em>
+          <em>Rating: {rating} of 5 stars</em>
           &nbsp;·&nbsp;
           <cite>By {user.username}</cite>
         </p>
-        <ReactMarkdown>{instructions}</ReactMarkdown>
+        <ReactMarkdown>{body}</ReactMarkdown>
       </WrapperChild>
     </Wrapper>
   );
@@ -114,4 +107,4 @@ const WrapperChild = styled.div`
   flex: 1;
 `;
 
-export default NewRecipe;
+export default NewReview;
