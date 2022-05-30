@@ -31,9 +31,9 @@ function HikeList() {
         ))
       ) : (
         <>
-          <h2>No hikes Found</h2>
+          <h2>No Hikes Found</h2>
           <Button as={Link} to="/new">
-            Make a New hike
+            Make a New Hike
           </Button>
         </>
       )}
