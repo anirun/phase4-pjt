@@ -11,7 +11,10 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-
+# Use activerecord/reset-pk-sequence to reset pk sequence when re-seeding db
+gem 'activerecord-reset-pk-sequence'
+# faker gem to populate data
+gem 'faker'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
