@@ -25,7 +25,7 @@ function HikeList() {
                 &nbsp;·&nbsp;
                 <cite>{hike.location}</cite>
               </p>
-              <ReactMarkdown>{hike.reviews}</ReactMarkdown>
+              <Button>Read Reviews</Button>
             </Box>
           </hike>
         ))
