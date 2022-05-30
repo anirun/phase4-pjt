@@ -12,7 +12,7 @@ class Api::HikesController < ApplicationController
   private
 
   def hike_params
-    params.permit(:title, :instructions, :minutes_to_complete)
+    params.permit(:name, :location, :minutes_to_complete)
   end
 
 end
