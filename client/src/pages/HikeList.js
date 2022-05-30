@@ -4,36 +4,36 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles";
 
-function RecipeList() {
-  const [recipes, setRecipes] = useState([]);
+function HikeList() {
+  const [hikes, setHikes] = useState([]);
 
   useEffect(() => {
-    fetch("/api/recipes")
+    fetch("/api/hikes")
       .then((r) => r.json())
-      .then(setRecipes);
+      .then(setHikes);
   }, []);
 
   return (
     <Wrapper>
-      {recipes.length > 0 ? (
-        recipes.map((recipe) => (
-          <Recipe key={recipe.id}>
+      {hikes.length > 0 ? (
+        hikes.map((hike) => (
+          <hike key={hike.id}>
             <Box>
-              <h2>{recipe.title}</h2>
+              <h2>{hike.name}</h2>
               <p>
-                <em>Time to Complete: {recipe.minutes_to_complete} minutes</em>
+                <em>Time to Complete: {hike.minutes_to_complete} minutes</em>
                 &nbsp;·&nbsp;
-                <cite>By {recipe.user.username}</cite>
+                <cite>{hike.location}</cite>
               </p>
-              <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
+              <ReactMarkdown>{hike.reviews}</ReactMarkdown>
             </Box>
-          </Recipe>
+          </hike>
         ))
       ) : (
         <>
-          <h2>No Recipes Found</h2>
+          <h2>No hikes Found</h2>
           <Button as={Link} to="/new">
-            Make a New Recipe
+            Make a New hike
           </Button>
         </>
       )}
@@ -46,8 +46,8 @@ const Wrapper = styled.section`
   margin: 40px auto;
 `;
 
-const Recipe = styled.article`
+const hike = styled.article`
   margin-bottom: 24px;
 `;
 
-export default RecipeList;
+export default HikeList;
