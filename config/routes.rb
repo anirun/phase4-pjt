@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
-  resources :reviews
+  
   namespace :api do
-    resources :hikes, only: [:index, :show]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
+    resources :hikes
+    
+    resources :reviews
+    
+    resources :hikes, only: [:index, :show] do
+      resources :reviews, shallow: true
+    end
   end
   # all other routes will be load our React application
   # this route definition matches:

@@ -16,7 +16,7 @@ function NewReview({ user, hike }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch(`/api/hike/${hike.id}/reviews`, {
+    fetch(`/api/hikes/${hike.id}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

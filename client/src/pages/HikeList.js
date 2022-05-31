@@ -4,11 +4,25 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles";
 
+const Wrapper = styled.section`
+  max-width: 800px;
+  margin: 40px auto;
+`;
+
+// const style = styled.article`
+//   margin-bottom: 24px;
+// `;
+
 function HikeList() {
   const [hikes, setHikes] = useState([]);
 
   useEffect(() => {
-    fetch("/api/hikes")
+    fetch("/api/hikes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
       .then((r) => r.json())
       .then(setHikes);
   }, []);
@@ -17,17 +31,17 @@ function HikeList() {
     <Wrapper>
       {hikes.length > 0 ? (
         hikes.map((hike) => (
-          <hike key={hike.id}>
+          <div key={hike.id}>
             <Box>
               <h2>{hike.name}</h2>
               <p>
                 <em>Time to Complete: {hike.minutes_to_complete} minutes</em>
                 &nbsp;·&nbsp;
                 <cite>{hike.location}</cite>
+                <ReactMarkdown>{hike.reviews}</ReactMarkdown>
               </p>
-              <Button>Read Reviews</Button>
             </Box>
-          </hike>
+          </div>
         ))
       ) : (
         <>
@@ -41,13 +55,6 @@ function HikeList() {
   );
 }
 
-const Wrapper = styled.section`
-  max-width: 800px;
-  margin: 40px auto;
-`;
 
-const hike = styled.article`
-  margin-bottom: 24px;
-`;
 
 export default HikeList;
