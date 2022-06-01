@@ -27,7 +27,7 @@ function HikeList() {
       .then((r) => r.json())
       .then(data => {
         setHikes(data)
-        console.log(data.reviews)
+        console.log(hikes[0].reviews[0].body)
       });
   }, []);
 
@@ -41,8 +41,10 @@ function HikeList() {
               <p>
                 <em>Time to Complete: {hike.minutes_to_complete} minutes</em>
                 &nbsp;·&nbsp;
+                <em>Reviewed by {hike.users.length} users </em>
+                &nbsp;·&nbsp;
                 <cite>{hike.location}</cite>
-                <ReactMarkdown>{hike.reviews}</ReactMarkdown>
+                <ReactMarkdown>{hike.reviews[0].body}</ReactMarkdown>
               </p>
             </Box>
           </div>
