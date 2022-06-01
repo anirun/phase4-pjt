@@ -18,14 +18,16 @@ const HikeCard = ({hike}) => {
 
     return(
         <div>
-            <Box>
+            <Box key={hike.id}>
                 <h2>{hikeObj.name}</h2>
                 <p>
                     <em>Time to Complete: {hikeObj.minutes_to_complete} minutes </em>
+                    &nbsp; &nbsp;
                     <em>Reviewed by {hikeObj.users.length} hikers </em>
                     &nbsp; &nbsp;
                     <cite>{hikeObj.location}</cite>
-                    <ReactMarkdown>{hikeObj.reviews}</ReactMarkdown>
+                    <ReactMarkdown>{hikeObj.reviews[0].body}</ReactMarkdown>
+                    <Button>See All Reviews</Button>
                 </p>
             </Box>
         </div>
