@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import Login from "../pages/Login";
 import HikeList from "../pages/HikeList";
 import NewReview from "../pages/NewReview";
+import HikeCard from "../pages/HikeCard";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,6 +25,9 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
+          <Route path="/hikes/:id">
+            <HikeCard user={user} />
+          </Route>
           <Route path="/new">
             <NewReview user={user} />
           </Route>

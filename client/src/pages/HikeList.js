@@ -15,6 +15,7 @@ const Wrapper = styled.section`
 
 function HikeList() {
   const [hikes, setHikes] = useState([]);
+  const [reviews, setReviews] = useState([])
 
   useEffect(() => {
     fetch("/api/hikes", {
@@ -24,7 +25,10 @@ function HikeList() {
       }
     })
       .then((r) => r.json())
-      .then(setHikes);
+      .then(data => {
+        setHikes(data)
+        console.log(data.reviews)
+      });
   }, []);
 
   return (

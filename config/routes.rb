@@ -5,10 +5,7 @@ Rails.application.routes.draw do
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
-    resources :hikes
-    
-    resources :reviews
-    
+  
     resources :hikes, only: [:index, :show] do
       resources :reviews, shallow: true
     end

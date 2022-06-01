@@ -1,6 +1,7 @@
 class HikeSerializer < ActiveModel::Serializer
-  
-  attributes :id, :name, :location, :minutes_to_complete#, reviews
+  has_many :reviews
+  has_many :users
+  attributes :id, :name, :location, :minutes_to_complete
 
   # attribute :reviews do |object|
   #   ReviewSerializer.new(object.reviews)
