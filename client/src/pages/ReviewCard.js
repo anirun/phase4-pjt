@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import ReactMarkdown from "react-markdown";
 import { Box, Button } from '../styles';
 
 const ReviewCard = ({review}) => {
     const [reviewObj, setReviewObj] = useState(review);
+    const [errors, setErrors] = useState([]);
     const {id} = useParams();
+    const history = useHistory();
     useEffect(() => {
         if(!reviewObj) {
         fetch(`/api/reviews/${id}`)
@@ -15,6 +17,21 @@ const ReviewCard = ({review}) => {
         }
             )}
     }, [reviewObj, id]);
+
+    function deleteReview() {
+        setErrors([]);
+        fetch(`/api/reviews/${reviewObj.id}`, {
+            method: 'DELETE'
+        })
+        .then((r) => {
+            if (r.ok) {
+                history.push('/hikes')
+            } else {
+                r.json().then((error) => setErrors(error.errors));
+            }
+            
+        })
+    }
 
     if (!reviewObj) return <div>Loading...</div>;
 
@@ -29,7 +46,8 @@ const ReviewCard = ({review}) => {
                     <em>Time to Complete: {reviewObj.hike.minutes_to_complete} minutes </em>
                     &nbsp; &nbsp;
                     <ReactMarkdown>{reviewObj.body}</ReactMarkdown>
-                    <Button>See All Reviews</Button>
+                    <Button onClick={deleteReview}>Delete Review</Button>
+
                 </p>
             </Box>
         </div>

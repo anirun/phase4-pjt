@@ -10,14 +10,20 @@ class Api::ReviewsController < ApplicationController
     end
   
     def show
-      review = Review.find(params[:id])
+      review = Review.find_by_id(params[:id])
       render json: review, include: [:hike, :user]
     end
+
+    def destroy
+      review = Review.find_by_id(params[:id])
+      review.destroy
+    end
+      
   
     private
   
     def review_params
-      params.permit(:title, :rating, :body, :user, :hike)
+      params.permit(:title, :rating, :body, :user_id, :hike)
     end
   
   end
