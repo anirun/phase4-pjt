@@ -21,13 +21,13 @@ const ReviewCard = ({review}) => {
     return(
         <div>
             <Box key={reviewObj.id}>
-                <h2>{reviewObj.name}</h2>
+                <h2>{reviewObj.hike.name}</h2>
+                <cite>{reviewObj.hike.location}</cite>
+                <h3>{reviewObj.title}</h3>
+                <em>Reviewed by {reviewObj.user.username} </em>
                 <p>
                     <em>Time to Complete: {reviewObj.hike.minutes_to_complete} minutes </em>
                     &nbsp; &nbsp;
-                    <em>Reviewed by {reviewObj.user.username} </em>
-                    &nbsp; &nbsp;
-                    <cite>{reviewObj.hike.location}</cite>
                     <ReactMarkdown>{reviewObj.body}</ReactMarkdown>
                     <Button>See All Reviews</Button>
                 </p>

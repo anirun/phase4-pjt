@@ -22,7 +22,7 @@ const HikeCard = ({hike}) => {
 
     return(
         <div>
-            <Box key={hike.id}>
+            <Box key={hikeObj.id}>
                 <h2>{hikeObj.name}</h2>
                 <p>
                     <em>Time to Complete: {hikeObj.minutes_to_complete} minutes </em>
