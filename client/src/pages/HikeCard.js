@@ -6,11 +6,15 @@ import { Box, Button } from '../styles';
 const HikeCard = ({hike}) => {
     const [hikeObj, setHikeObj] = useState(hike);
     const {id} = useParams();
+    
     useEffect(() => {
         if(!hikeObj) {
         fetch(`/api/hikes/${id}`)
         .then(r => r.json())
-        .then(hike => setHikeObj(hike))
+        .then(h => {
+            setHikeObj(h)
+            console.log(h)
+            })
         }
     }, [hikeObj, id]);
 

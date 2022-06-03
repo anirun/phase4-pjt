@@ -4,10 +4,11 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
-function NewReview({ user, hike }) {
-  const [title, setTitle] = useState("My Awesome Recipe");
+function NewReview({ user/*, hike*/ }) {
+  const [title, setTitle] = useState("Not All Who Wander Are Lost");
   const [rating, setRating] = useState("5");
-  const [body, setBody] = useState(`Ispem Lorum`);
+  const [body, setBody] = useState(`How was your hike?`);
+  const [hike, setHike] = useState(`The Great Outdoors`);
 
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +17,7 @@ function NewReview({ user, hike }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch(`/api/hikes/${hike.id}/reviews`, {
+    fetch(`/api/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,8 +26,8 @@ function NewReview({ user, hike }) {
         title,
         rating,
         body,
-        hike_id: hike.id,
-        user_id: user.id
+        hike,
+        user
       }),
     }).then((r) => {
       setIsLoading(false);
@@ -71,6 +72,15 @@ function NewReview({ user, hike }) {
             />
           </FormField>
           <FormField>
+            <Label htmlFor="hike">Where'd you hike?</Label>
+            <Textarea
+              id="hike"
+              rows="1"
+              value={hike}
+              onChange={(e) => setHike(e.target.value)}
+            />
+          </FormField>
+          <FormField>
             <Button color="primary" type="submit">
               {isLoading ? "Loading..." : "Submit Review"}
             </Button>
@@ -85,6 +95,8 @@ function NewReview({ user, hike }) {
       <WrapperChild>
         <h1>{title}</h1>
         <p>
+          <cite>{hike}</cite>
+          &nbsp;·&nbsp;
           <em>Rating: {rating} of 5 stars</em>
           &nbsp;·&nbsp;
           <cite>By {user.username}</cite>

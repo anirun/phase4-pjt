@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HikeCard from './HikeCard';
 
-function HikeList() {
+function HikesList() {
   const [hikes, setHikes] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ function HikeList() {
       });
   }, []);
 
-  const renderHikes = hikes.map(hike => <HikeCard key={hike.id} hike={hike}/>)
+  const renderHikes = hikes.map((hike) => <HikeCard key={hike.id} hike={hike} />)
 
   return (
     <div>
@@ -23,4 +23,4 @@ function HikeList() {
 
 
 
-export default HikeList;
+export default HikesList;

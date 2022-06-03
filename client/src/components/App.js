@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "../pages/Login";
-import HikeList from "../pages/HikeList";
+import HikesList from "../pages/HikesList";
 import NewReview from "../pages/NewReview";
 import HikeCard from "../pages/HikeCard";
-
+import ReviewsList from '../pages/ReviewsList';
+// import UserCard from '../pages/UserCard';
+import ReviewCard from '../pages/ReviewCard';
 function App() {
   const [user, setUser] = useState(null);
 
@@ -25,6 +27,18 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
+          <Route path="/reviews/:id">
+            <ReviewCard user={user} />
+          </Route>
+          <Route path="/reviews">
+            <ReviewsList user={user} />
+          </Route>
+          <Route path="/users/:id/reviews">
+            <ReviewsList user={user} />
+          </Route>
+          {/* <Route path="/users/:id">
+            <UserCard user={user} />
+          </Route>           */}
           <Route path="/hikes/:id">
             <HikeCard user={user} />
           </Route>
@@ -32,7 +46,7 @@ function App() {
             <NewReview user={user} />
           </Route>
           <Route path="/">
-            <HikeList />
+            <HikesList />
           </Route>
         </Switch>
       </main>
