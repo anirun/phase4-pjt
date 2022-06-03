@@ -19,7 +19,7 @@ Review.reset_pk_sequence
     rating = Faker::Number.within(range: 1..5)
     body = Faker::Lorem.paragraph_by_chars(number: 250)
 
-    Review.create!(user: u, title: title, rating: rating, body: body, hike: h)
+    Review.create!(title: title, rating: rating, body: body, user: u, hike: h)
 end
 
 puts '🪴🪴🪴'

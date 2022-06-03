@@ -11,7 +11,7 @@ class Api::ReviewsController < ApplicationController
   
     def show
       review = Review.find(params[:id])
-      render json: review, include: :hike
+      render json: review, include: [:hike, :user]
     end
   
     private
