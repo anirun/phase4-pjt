@@ -1,7 +1,13 @@
 class Api::ReviewsController < ApplicationController
   
     def index
-      render json: Review.all
+      if params[:hike_id]
+        hike = Hike.find(params[:hike_id])
+        reviews = hike.reviews
+      else
+        reviews = Review.all
+      end
+      render json: reviews, include: [:hike, :user]
     end
   
     def create
@@ -11,7 +17,7 @@ class Api::ReviewsController < ApplicationController
   
     def show
       review = Review.find_by_id(params[:id])
-      render json: review, include: [:hike, :user]
+      render json: review, include: [:hike, :users]
     end
 
     def destroy
@@ -19,6 +25,10 @@ class Api::ReviewsController < ApplicationController
       review.destroy
     end
       
+    def update
+      review = Review.find_by_id(params[:id])
+
+    end
   
     private
   

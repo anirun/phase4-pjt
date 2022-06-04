@@ -32,7 +32,7 @@ const HikeCard = ({hike}) => {
                     <cite>{hikeObj.location}</cite>
                     <div>
                     {hikeObj.reviews.length > 0 ?
-                        (<ReactMarkdown>{hikeObj.reviews[0].body}</ReactMarkdown>) : (<ReactMarkdown>Not yet reviewed!</ReactMarkdown>)
+                        (<ReactMarkdown>{hikeObj.description}</ReactMarkdown>) : (<ReactMarkdown>Not yet reviewed!</ReactMarkdown>)
                     }
                     </div>
                     

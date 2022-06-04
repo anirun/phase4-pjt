@@ -17,7 +17,7 @@ end
   private
 
   def hike_params
-    params.permit(:name, :location, :minutes_to_complete)
+    params.permit(:name, :location, :minutes_to_complete, :description)
   end
 
 end

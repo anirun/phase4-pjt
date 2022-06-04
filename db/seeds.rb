@@ -13,7 +13,8 @@ Review.reset_pk_sequence
     name = Faker::Mountain.name
     location = Faker::Mountain.range
     minutes_to_complete = Faker::Number.within(range: 30..4600)
-    h = Hike.create!(name: name, location: location, minutes_to_complete: minutes_to_complete)
+    description = Faker::Lorem.paragraph_by_chars(number: 500)
+    h = Hike.create!(name: name, location: location, minutes_to_complete: minutes_to_complete, description: description)
 
     title = Faker::Lorem.sentence(word_count: 3)
     rating = Faker::Number.within(range: 1..5)

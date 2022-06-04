@@ -6,8 +6,10 @@ import HikesList from "../pages/HikesList";
 import NewReview from "../pages/NewReview";
 import HikeCard from "../pages/HikeCard";
 import ReviewsList from '../pages/ReviewsList';
+import HikeReviewsList from '../pages/HikeReviewsList';
 // import UserCard from '../pages/UserCard';
 import ReviewCard from '../pages/ReviewCard';
+
 function App() {
   const [user, setUser] = useState(null);
 
@@ -27,6 +29,9 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
+          <Route path="/hikes/:id/reviews">
+            <HikeReviewsList user={user} />
+          </Route>
           <Route path="/reviews/:id">
             <ReviewCard user={user} />
           </Route>
