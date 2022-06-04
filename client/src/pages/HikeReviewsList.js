@@ -11,11 +11,10 @@ function HikeReviewsList() {
       .then((r) => r.json())
       .then(data => {
         setReviews(data)
-        console.log(reviews)
       });
-  }, []);
+  }, [id]);
   
-  const renderReviews = reviews.map((review) => <HikeReviewCard key={review.hike.id} review={review}/> )
+  const renderReviews = reviews.map((review) => <HikeReviewCard key={review.id} review={review}/> )
 
   return (
     <div>

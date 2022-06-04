@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import ReactMarkdown from "react-markdown";
 import { Box, Button } from '../styles';
 
 const HikeCard = ({hike}) => {
     const [hikeObj, setHikeObj] = useState(hike);
     const {id} = useParams();
+    const history = useHistory();
+
     console.log(hikeObj)
     useEffect(() => {
         if(!hikeObj) {
@@ -17,6 +19,10 @@ const HikeCard = ({hike}) => {
             })
         }
     }, [hikeObj, id]);
+
+    const onClick = () => {
+        history.push(`/hikes/${hike.id}/reviews`)
+    }
 
     if (!hikeObj) return <div>Loading...</div>;
 
@@ -31,12 +37,10 @@ const HikeCard = ({hike}) => {
                     &nbsp; &nbsp;
                     <cite>{hikeObj.location}</cite>
                     <div>
-                    {hikeObj.reviews.length > 0 ?
-                        (<ReactMarkdown>{hikeObj.description}</ReactMarkdown>) : (<ReactMarkdown>Not yet reviewed!</ReactMarkdown>)
-                    }
+                    <ReactMarkdown>{hikeObj.description}</ReactMarkdown>
                     </div>
                     
-                    <Button>See All Reviews</Button>
+                    <Button onClick={onClick}>See All Reviews</Button>
                 </p>
             </Box>
         </div>

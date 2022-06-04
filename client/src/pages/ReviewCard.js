@@ -28,6 +28,7 @@ const ReviewCard = ({review}) => {
                 history.push('/hikes')
             } else {
                 r.json().then((error) => setErrors(error.errors));
+                return errors
             }
             
         })
@@ -47,7 +48,7 @@ const ReviewCard = ({review}) => {
                     &nbsp; &nbsp;
                     <ReactMarkdown>{reviewObj.body}</ReactMarkdown>
                     <Button onClick={deleteReview}>Delete Review</Button>
-
+                    
                 </p>
             </Box>
         </div>
