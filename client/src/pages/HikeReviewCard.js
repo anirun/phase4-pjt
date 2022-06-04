@@ -33,7 +33,7 @@ const HikeReviewCard = ({review}) => {
                     &nbsp; &nbsp;
                     <ReactMarkdown>{review.body}</ReactMarkdown>
                     <Button onClick={deleteReview}>Delete Review</Button>
-
+                
                 </p>
             </Box>
         </div>

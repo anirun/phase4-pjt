@@ -25,9 +25,14 @@ class Api::ReviewsController < ApplicationController
       review.destroy
     end
       
-    def update
+    def update # PATCH /reviews/:id
       review = Review.find_by_id(params[:id])
-
+      if review
+        review.update(review_params)
+        render json: review
+      else
+        render json: { error: "Review not found" }, status: :not_found
+      end
     end
   
     private

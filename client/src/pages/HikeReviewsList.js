@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
 import HikeReviewCard from "./HikeReviewCard";
 
-function HikeReviewsList(user) {
+function HikeReviewsList() {
   const [reviews, setReviews] = useState([]);
   const {id} = useParams();
 

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
-function NewReview({ user/*, hike*/ }) {
+function NewReview({ user }) {
   const [title, setTitle] = useState("Not All Who Wander Are Lost");
   const [rating, setRating] = useState("5");
   const [body, setBody] = useState(`How was your hike?`);
