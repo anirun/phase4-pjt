@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
@@ -8,16 +8,29 @@ function NewReview({ user }) {
   const [title, setTitle] = useState("Not All Who Wander Are Lost");
   const [rating, setRating] = useState("5");
   const [body, setBody] = useState(`How was your hike?`);
-  const [hike, setHike] = useState(`The Great Outdoors`);
-
+  const [hikeId, setHikeId] = useState(`Choose a hike!`);
+  const [hikeList, setHikeList] = useState([])
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
+  useEffect(() => {
+    fetch(`api/hikes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((r) => r.json())
+    .then((d) => {
+      setHikeList(d)
+      console.log(hikeList)
+    })
+  }, []) 
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch(`/api/reviews`, {
+    fetch(`/api/hikes/${hikeId}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,13 +39,13 @@ function NewReview({ user }) {
         title,
         rating,
         body,
-        hike,
-        user
+        hike_id: hikeId,
+        user_id: user.id
       }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        history.push("/");
+        history.push(`/hikes/${hikeId}/reviews`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -71,15 +84,17 @@ function NewReview({ user }) {
               onChange={(e) => setBody(e.target.value)}
             />
           </FormField>
-          <FormField>
-            <Label htmlFor="hike">Where'd you hike?</Label>
-            <Textarea
-              id="hike"
-              rows="1"
-              value={hike}
-              onChange={(e) => setHike(e.target.value)}
-            />
-          </FormField>
+          <FormField>  
+            <Label htmlFor="hike"> Where'd you hike? </Label>  
+            <select id= "hike" onChange={(e) => setHikeId(e.target.value)} >  
+              <option> ---Choose your hike!--- </option>  
+              {hikeList.map((hike) =>
+              <option key={hike.id} value={hike.id}>
+                {hike.name}
+              </option>
+              )}
+            </select>  
+          </FormField>  
           <FormField>
             <Button color="primary" type="submit">
               {isLoading ? "Loading..." : "Submit Review"}
@@ -95,8 +110,6 @@ function NewReview({ user }) {
       <WrapperChild>
         <h1>{title}</h1>
         <p>
-          <cite>{hike}</cite>
-          &nbsp;·&nbsp;
           <em>Rating: {rating} of 5 stars</em>
           &nbsp;·&nbsp;
           <cite>By {user.username}</cite>
