@@ -23,7 +23,7 @@ A user can...
   * create a review for a specific hike
   * modify or delete a review
 
-[Take a Hike screenshot](client/public/app-screenshot.jpg)
+![Take a Hike screenshot](client/public/app-screenshot.jpg)
 
 ## This project was built for Flatiron School's Phase 4 Project
 
