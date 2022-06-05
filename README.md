@@ -25,6 +25,6 @@ A user can...
 
 ![Take a Hike screenshot](client/public/app-screenshot.jpg)
 
-## This project was built for Flatiron School's Phase 4 Project
+This project was built for Flatiron School's Phase 4 Project
 
 Last modified June 4 2022
