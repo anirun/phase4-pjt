@@ -5,7 +5,7 @@ class Api::HikesController < ApplicationController
   end
 
   def create
-    hike = @current_user.hikes.create!(hike_params)
+    hike = Hike.create!(hike_params)
     render json: hike, status: :created
   end
 
