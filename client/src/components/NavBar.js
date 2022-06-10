@@ -18,6 +18,9 @@ function NavBar({ user, setUser }) {
         <Link to="/">T🌲KE 🌲 HIKE</Link>
       </Logo>
       <Nav>
+        {/* <Button onClick={viewAlphabetical}>
+          View all hikes alphabetically
+        </Button> */}
         <Button as={Link} to="/profile">
           View My Hikes
         </Button>

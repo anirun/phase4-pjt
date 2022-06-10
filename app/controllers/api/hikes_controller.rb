@@ -4,6 +4,10 @@ class Api::HikesController < ApplicationController
     render json: Hike.all
   end
 
+  def order_by_name
+    render json: Hike.order_by_name
+  end
+
   def create
     hike = Hike.create!(hike_params)
     render json: hike, status: :created
