@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
 import HikeReviewCard from "./HikeReviewCard";
-
+import { Error } from "../styles";
 function HikeReviewsList({user}) {
   const [reviews, setReviews] = useState([]);
   const {id} = useParams();
@@ -18,7 +18,7 @@ function HikeReviewsList({user}) {
 
   return (
     <div>
-      {renderReviews}
+      {reviews.length > 0 ? renderReviews : <Error>"There are no reviews yet. Maybe you should take a hike!"</Error>}
     </div>
   );
 }

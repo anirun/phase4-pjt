@@ -16,7 +16,7 @@ function ReviewsList() {
 
   return (
     <div>
-      {renderReviews}
+      { reviews.length > 0 ? renderReviews : "There are no reviews yet!" }
     </div>
   );
 }

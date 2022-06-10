@@ -65,10 +65,23 @@ function NewReview({ user }) {
               onChange={(e) => setTitle(e.target.value)}
             />
           </FormField>
+          <FormField>  
+            <Label htmlFor="hike"> Where'd you hike? </Label>  
+            <select id= "hike" onChange={(e) => setHikeId(e.target.value)} >  
+              <option> ---Choose your hike!--- </option>  
+              {hikeList.map((hike) =>
+              <option key={hike.id} value={hike.id}>
+                {hike.name}
+              </option>
+              )}
+            </select>  
+          </FormField>
           <FormField>
             <Label htmlFor="rating">Rating</Label>
             <Input
               type="number"
+              min="1"
+              max="5"
               id="rating"
               value={rating}
               onChange={(e) => setRating(e.target.value)}
@@ -83,17 +96,7 @@ function NewReview({ user }) {
               onChange={(e) => setBody(e.target.value)}
             />
           </FormField>
-          <FormField>  
-            <Label htmlFor="hike"> Where'd you hike? </Label>  
-            <select id= "hike" onChange={(e) => setHikeId(e.target.value)} >  
-              <option> ---Choose your hike!--- </option>  
-              {hikeList.map((hike) =>
-              <option key={hike.id} value={hike.id}>
-                {hike.name}
-              </option>
-              )}
-            </select>  
-          </FormField>  
+  
           <FormField>
             <Button color="primary" type="submit">
               {isLoading ? "Loading..." : "Submit Review"}

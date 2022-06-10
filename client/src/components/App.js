@@ -26,6 +26,7 @@ function App() {
 
   return (
     <>
+      <p/>
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
