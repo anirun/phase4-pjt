@@ -23,7 +23,6 @@ function NewReview({ user }) {
     }).then((r) => r.json())
     .then((d) => {
       setHikeList(d)
-      console.log(hikeList)
     })
   }, []) 
 
