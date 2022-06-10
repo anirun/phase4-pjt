@@ -25,7 +25,7 @@ class Api::ReviewsController < ApplicationController
       review.destroy
     end
       
-    def update # PATCH /reviews/:id
+    def update
       review = Review.find(params[:id])
       review.update!(review_params)
       render json: review, status: :ok
