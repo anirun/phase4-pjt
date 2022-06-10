@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
   private
 
   def authorize
-    @current_user = User.find(session[:user_id])
+    @current_user ||= User.find(session[:user_id])
   end
 
   def render_unprocessable_entity_response(exception)

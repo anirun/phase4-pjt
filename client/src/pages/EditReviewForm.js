@@ -35,7 +35,7 @@ const EditReviewForm = ({reviewObj, handleUpdate, handleError}) => {
             })
         })
         .then((r) => {
-            if (r.status === 201) {
+            if (r.status === 200) {
                 r.json()
                 .then(data => {
                     handleUpdate(data)

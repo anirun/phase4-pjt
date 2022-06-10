@@ -7,32 +7,28 @@ class Api::ReviewsController < ApplicationController
       else
         reviews = Review.all
       end
-      render json: reviews, include: [:hike, :user]
+      render json: reviews
     end
   
     def create
-      review = Review.create!(review_params)
+      review = @current_user.reviews.create!(review_params)
       render json: review, status: :created
     end
   
     def show
-      review = Review.find_by_id(params[:id])
-      render json: review, include: [:hike, :users]
+      review = Review.find(params[:id])
+      render json: review
     end
 
     def destroy
-      review = Review.find_by_id(params[:id])
+      review = Review.find(params[:id])
       review.destroy
     end
       
     def update # PATCH /reviews/:id
-      review = Review.find_by_id(params[:id])
-      if review
-        review.update(review_params)
-        render json: review, status: :created
-      else
-        render json: { error: "Review not found" }, status: :not_found
-      end
+      review = Review.find(params[:id])
+      review.update!(review_params)
+      render json: review, status: :ok
     end
   
     private

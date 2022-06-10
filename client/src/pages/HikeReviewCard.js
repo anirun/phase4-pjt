@@ -5,7 +5,7 @@ import { Box, Button } from '../styles';
 import styled from "styled-components";
 import EditReviewForm from './EditReviewForm';
 
-const HikeReviewCard = ({review, handleError}) => {
+const HikeReviewCard = ({user, review, handleError}) => {
     const history = useHistory();
     const {id} = useParams();
     const [reviewObj, setReviewObj] = useState(null);
@@ -54,9 +54,14 @@ const HikeReviewCard = ({review, handleError}) => {
                             <em>Time to Complete: {finalReview.hike.minutes_to_complete} minutes </em>
                             &nbsp; &nbsp;
                             <ReactMarkdown>{finalReview.body}</ReactMarkdown>
+                            { finalReview.user.id === user.id ? (
+                            <>
                             <Button name="edit-mode" id="edit-btn" onClick={handleClick}>Edit</Button>
                             &nbsp; &nbsp;
                             <Button name="delete" id="delete-btn" onClick={handleClick}>Delete</Button>
+                            </>
+                            ) : null
+                            }
                         </p>
                     </Box>
                 </Wrapper>

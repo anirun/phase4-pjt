@@ -7,7 +7,7 @@ import NewReview from "../pages/NewReview";
 import HikeCard from "../pages/HikeCard";
 import ReviewsList from '../pages/ReviewsList';
 import HikeReviewsList from '../pages/HikeReviewsList';
-// import UserCard from '../pages/UserCard';
+import UserCard from '../pages/UserCard';
 import ReviewCard from '../pages/ReviewCard';
 
 function App() {
@@ -41,9 +41,9 @@ function App() {
           <Route path="/users/:id/reviews">
             <ReviewsList user={user} />
           </Route>
-          {/* <Route path="/users/:id">
+          <Route path="/profile">
             <UserCard user={user} />
-          </Route>           */}
+          </Route>          
           <Route path="/hikes/:id">
             <HikeCard user={user} />
           </Route>

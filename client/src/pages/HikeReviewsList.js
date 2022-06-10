@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
 import HikeReviewCard from "./HikeReviewCard";
 
-function HikeReviewsList() {
+function HikeReviewsList({user}) {
   const [reviews, setReviews] = useState([]);
   const {id} = useParams();
 
@@ -14,7 +14,7 @@ function HikeReviewsList() {
       });
   }, [id]);
   
-  const renderReviews = reviews.map((review) => <HikeReviewCard key={review.id} review={review}/> )
+  const renderReviews = reviews.map((review) => <HikeReviewCard key={review.id} review={review} user={user}/> )
 
   return (
     <div>

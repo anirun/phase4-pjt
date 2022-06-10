@@ -11,8 +11,8 @@ class Api::HikesController < ApplicationController
 
   def show
     hike = Hike.find(params[:id])
-    render json: hike, include: [:reviews, :users]
-end
+    render json: hike
+  end
 
   private
 

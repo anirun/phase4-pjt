@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import {useLocation, useHistory, useParams} from 'react-router-dom';
 import ReactMarkdown from "react-markdown";
 import { Box, Button } from '../styles';
 
@@ -7,6 +7,7 @@ const HikeCard = ({hike}) => {
     const [hikeObj, setHikeObj] = useState(hike);
     const {id} = useParams();
     const history = useHistory();
+    const location = useLocation();
 
     console.log(hikeObj)
     useEffect(() => {
@@ -29,18 +30,18 @@ const HikeCard = ({hike}) => {
     return(
         <div>
             <Box key={hikeObj.id}>
-                <h2>{hikeObj.name}</h2>
+                <h2>{hikeObj.name || hikeObj.hike.name}</h2>
                 <p>
-                    <em>Time to Complete: {hikeObj.minutes_to_complete} minutes </em>
+                    <em>Time to Complete: {hikeObj.minutes_to_complete || hikeObj.hike.minutes_to_complete} minutes </em>
                     &nbsp; &nbsp;
-                    <em>Reviewed by {hikeObj.users.length} hikers </em>
+                    <em>Reviewed by {hikeObj?.users.length || hikeObj.hike?.users.length || 0 } hikers </em>
                     &nbsp; &nbsp;
-                    <cite>{hikeObj.location}</cite>
+                    <cite>{hikeObj.location || hikeObj.hike.location}</cite>
                     <div>
-                    <ReactMarkdown>{hikeObj.description}</ReactMarkdown>
+                    <ReactMarkdown>{hikeObj.description || hikeObj.hike.description}</ReactMarkdown>
                     </div>
                     
-                    <Button onClick={onClick}>See All Reviews</Button>
+                    { location.pathname === "/profile" ? null : <Button onClick={onClick}>See All Reviews</Button>}
                 </p>
             </Box>
         </div>
